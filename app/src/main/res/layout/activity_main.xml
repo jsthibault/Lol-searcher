@@ -1,17 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:background="@color/blue"
     tools:context="com.example.mowgli.lol_searcher.MainActivity">
 
-    <TextView
-        android:text="Hello World!"
+    <EditText
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="45dp"
+        android:inputType="textPersonName"
+        android:text="Summoner name"
+        android:ems="10"
+        android:id="@+id/summoner_name"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+
+        android:background="@drawable/round_corner"
+        />
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="160dp"
+        android:id="@+id/imageView"
+        android:src="@mipmap/aurelion"
+        android:layout_above="@+id/summoner_name" />
+
+    <ImageButton
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:id="@+id/imageButton"
+        android:background="@mipmap/search"
+        android:layout_below="@+id/imageView"
+        android:layout_alignEnd="@+id/summoner_name" />
+
 </RelativeLayout>

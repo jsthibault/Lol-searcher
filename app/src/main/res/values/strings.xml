@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">lol-searcher</string>
+    <color name="white">#dbf0fc</color>
+    <color name="blue">#1F8ECD</color>
 </resources>
