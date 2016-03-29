@@ -36,6 +36,8 @@
         android:id="@+id/imageButton"
         android:background="@mipmap/search"
         android:layout_below="@+id/imageView"
-        android:layout_alignEnd="@+id/summoner_name" />
+        android:layout_alignEnd="@+id/summoner_name"
+        android:nestedScrollingEnabled="false"
+        android:onClick="onSearch" />
 
 </RelativeLayout>
