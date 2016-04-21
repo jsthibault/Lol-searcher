@@ -10,11 +10,18 @@
     android:background="@color/blue"
     tools:context="com.example.mowgli.lol_searcher.MainActivity">
 
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView"
+        android:src="@mipmap/aurelion"
+        android:layout_above="@+id/summoner_name" />
+
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="45dp"
         android:inputType="textPersonName"
-        android:text="Summoner name"
+        android:hint="Summoner name"
         android:ems="10"
         android:id="@+id/summoner_name"
         android:layout_centerVertical="true"
@@ -23,12 +30,6 @@
         android:background="@drawable/round_corner"
         />
 
-    <ImageView
-        android:layout_width="fill_parent"
-        android:layout_height="160dp"
-        android:id="@+id/imageView"
-        android:src="@mipmap/aurelion"
-        android:layout_above="@+id/summoner_name" />
 
     <ImageButton
         android:layout_width="45dp"
@@ -39,5 +40,19 @@
         android:layout_alignEnd="@+id/summoner_name"
         android:nestedScrollingEnabled="false"
         android:onClick="onSearch" />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinner_server"
+        android:spinnerMode="dropdown"
+        android:entries="@array/server_arrays"
+        android:prompt="@string/server_prompt"
+        android:layout_below="@+id/summoner_name"
+        android:layout_alignStart="@+id/summoner_name"
+        android:layout_marginTop="39dp"
+        android:layout_alignEnd="@+id/summoner_name"
+        android:background="@drawable/round_corner"
+        />
 
 </RelativeLayout>

@@ -2,4 +2,13 @@
     <string name="app_name">lol-searcher</string>
     <color name="white">#dbf0fc</color>
     <color name="blue">#1F8ECD</color>
+
+    <string name="lol_searcher">MyAndroidApp</string>
+    <string name="server_prompt">Choose a server</string>
+    <string name="level">Level</string>
+
+    <string-array name="server_arrays">
+        <item>euw</item>
+        <item>na</item>
+    </string-array>
 </resources>
