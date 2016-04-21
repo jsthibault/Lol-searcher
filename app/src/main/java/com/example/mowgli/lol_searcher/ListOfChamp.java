@@ -42,7 +42,7 @@ public class ListOfChamp extends AppCompatActivity
         tmpServer = i.getStringExtra("server").toLowerCase();
         if (tmpName == null || tmpServer == null)
         {
-            System.out.println("Failed extra");
+            System.out.println("Failed extraa");
             return;
         }
         this._server = new Server(tmpServer, this._key);
