@@ -1,14 +1,18 @@
 package com.example.mowgli.lol_searcher;
 
 import android.content.Context;
+import android.net.Uri;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.Future;
 import com.koushikdutta.async.future.FutureCallback;
+import com.koushikdutta.async.http.AsyncHttpRequest;
+import com.koushikdutta.async.http.Headers;
 import com.koushikdutta.async.http.body.StringBody;
 import com.koushikdutta.ion.Ion;
+import com.koushikdutta.ion.loader.AsyncHttpRequestFactory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -238,8 +242,14 @@ public class Server
                         JsonArray       tmpArray = null;
                         String          tmp =  null;
 
-
-                        System.out.println(result);
+                        System.out.println(" id " + id);
+                        if (result == null)
+                        {
+                            System.out.println("KKK : " + "https://global.api.pvp.net/api/lol/static-data/" + _localisation + "/v1.2/champion/"
+                                    + id + "?api_key=" + _key);
+                            return;
+                        }
+                        System.out.println(result + " id " + id);
                         if ((tmpJson = result.getAsJsonObject("status")) != null)
                         {
                             if ((tmp = tmpJson.get("status_code").toString()) != null)
@@ -248,9 +258,7 @@ public class Server
                                 return;
                             }
                         }
-                        System.out.println("Looser : " + result.get("name").toString());
                         champ.setName(result.get("name").toString().replaceAll("\"",""));
-                        System.out.println("Looser2 : " + champ.getName());
                         champ.setTitle(result.get("title").toString().replaceAll("\"",""));
                         updateCallBack(CallBack.CHAMPION, context);
                     }

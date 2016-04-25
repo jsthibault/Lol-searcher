@@ -52,7 +52,14 @@ public class Champion implements ILolInstance
     public void fillData(Context context, Server server, ListOfChamp list)
     {
         this._list = list;
-        server.getName(context, this, this.getId());
+        try {
+            server.getName(context, this, this.getId());
+
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
     }
 
 }

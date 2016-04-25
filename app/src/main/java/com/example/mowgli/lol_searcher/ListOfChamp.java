@@ -48,11 +48,15 @@ public class ListOfChamp extends AppCompatActivity implements ILolInstance {
     public List<Integer> getListId() { return (this._listId); }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         String tmpName = null;
         String tmpServer = null;
 
-        this._listChampion.clear();
+        if (this._listChampion != null)
+        {
+            this._listChampion.clear();
+        }
         this._listName.clear();
         this._listId.clear();
         _index = 0;
@@ -63,7 +67,10 @@ public class ListOfChamp extends AppCompatActivity implements ILolInstance {
         this._progressChamp = (ProgressBar) findViewById(R.id.progressBarChamp);
         tmpName = i.getStringExtra("name").toLowerCase();
         tmpServer = i.getStringExtra("server").toLowerCase();
-        if (tmpName == null || tmpServer == null) {
+        System.out.print(tmpName);
+        System.out.print(tmpName);
+        if (tmpName == null || tmpServer == null)
+        {
             System.out.println("Failed extraa");
             return;
         }
