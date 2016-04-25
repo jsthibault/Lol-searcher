@@ -25,10 +25,12 @@ public class MainActivity extends AppCompatActivity {
     public void onSearch(View v)
     {
         Intent              i = new Intent(getApplicationContext(), ListOfChamp.class);
-        Spinner             mySpinner = (Spinner) findViewById(R.id.spinner_server);
+        Spinner             spinnerServer = (Spinner) findViewById(R.id.spinner_server);
+        Spinner             spinnerSeason = (Spinner) findViewById(R.id.spinner_season);
         String              summonerName = _mEdit.getText().toString();
 
-        i.putExtra("server", mySpinner.getSelectedItem().toString());
+        i.putExtra("server", spinnerServer.getSelectedItem().toString());
+        i.putExtra("season", spinnerSeason.getSelectedItem().toString().toUpperCase());
         if (TextUtils.isEmpty(summonerName))
         {
             _mEdit.setError("There is no summoner name to search");

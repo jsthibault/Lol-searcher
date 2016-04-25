@@ -48,11 +48,23 @@
         android:spinnerMode="dropdown"
         android:entries="@array/server_arrays"
         android:prompt="@string/server_prompt"
-        android:layout_below="@+id/summoner_name"
-        android:layout_alignStart="@+id/summoner_name"
-        android:layout_marginTop="39dp"
-        android:layout_alignEnd="@+id/summoner_name"
         android:background="@drawable/round_corner"
-        />
+        android:layout_below="@+id/spinner_season"
+        android:layout_marginTop="45dp"
+        android:layout_alignEnd="@+id/spinner_season"
+        android:layout_alignStart="@+id/spinner_season" />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinner_season"
+        android:spinnerMode="dropdown"
+        android:entries="@array/season"
+        android:prompt="@string/server_prompt"
+        android:background="@drawable/round_corner"
+        android:layout_below="@+id/summoner_name"
+        android:layout_marginTop="47dp"
+        android:layout_alignStart="@+id/summoner_name"
+        android:layout_alignEnd="@+id/summoner_name" />
 
 </RelativeLayout>

@@ -5,6 +5,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.google.gson.JsonObject;
 import com.koushikdutta.ion.Ion;
 
 /**
@@ -19,12 +20,15 @@ public class Summoner implements ILolInstance
     private String      _rank = null;
     private String      _division = null;
     private String      _localisation = null;
+    private JsonObject  _stats = null;
 
     private TextView    _msummonerName = null;
     private TextView    _mrank = null;
     private TextView    _mlevel = null;
     private ImageView   _micon = null;
     private ProgressBar _mprogressSum = null;
+
+    private ListOfChamp _callback = null;
 
     Summoner(String name)
     {
@@ -38,33 +42,31 @@ public class Summoner implements ILolInstance
     String getRank() { return(this._rank); }
     String getDivision() { return(this._division); }
     String getLocalisation() { return(this._localisation); }
+    JsonObject getStats() { return(this._stats); }
 
     void setId(String id) { this._id = id; }
     void setLvl(String lvl) { this._lvl = lvl; }
     void setIdIcon(String idIcon) { this._idIcon = idIcon; }
     void setRank(String rank) { this._rank = rank; }
     void setDivision(String division) { this._division = division; }
+    void setStats(JsonObject stats) {this._stats = stats; }
 
 
-    public void    updateSummoner(Context context)
+    @Override
+    public void    update(Context context)
     {
-        System.out.println("---_>LOLOLOL");
         this._mprogressSum.setVisibility(ProgressBar.GONE);
         this._msummonerName.setText(this._name);
         this._mrank.setText(this._rank + " " + this._division);
         this._mlevel.setText(context.getResources().getString(R.string.level) + " " + this._lvl + " " + this._localisation);
         Ion.with(this._micon)
                 .load("http://ddragon.leagueoflegends.com/cdn/6.6.1/img/profileicon/" + this._idIcon + ".png");
+        this._callback.getListChamp();
     }
 
-    void    display(Context context, Server server, TextView summonerName, TextView rank, TextView level,
-                 ImageView icon)
-    {
-        //A voir
-    }
 
     void    display(Context context, Server server, TextView summonerName, TextView rank, TextView level,
-                    ImageView icon, ProgressBar progressSum)
+                    ImageView icon, ProgressBar progressSum, ListOfChamp call)
     {
         this._micon = icon;
         this._mlevel = level;
@@ -72,6 +74,7 @@ public class Summoner implements ILolInstance
         this._msummonerName = summonerName;
         this._mprogressSum = progressSum;
         this._localisation = server.getLocalisation();
+        this._callback = call;
         if (this._name == null || this._id == null || this._lvl == null || this._idIcon == null ||
                 this._rank == null || this._division == null)
         {
@@ -80,7 +83,7 @@ public class Summoner implements ILolInstance
         }
         else
         {
-            updateSummoner(context);
+            update(context);
         }
     }
 }

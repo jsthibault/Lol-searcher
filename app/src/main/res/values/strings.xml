@@ -11,4 +11,9 @@
         <item>euw</item>
         <item>na</item>
     </string-array>
+
+    <string-array name="season">
+        <item>Season2016</item>
+        <item>Season2015</item>
+    </string-array>
 </resources>

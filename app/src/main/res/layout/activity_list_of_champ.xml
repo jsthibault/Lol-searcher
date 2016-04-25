@@ -47,21 +47,6 @@
         android:layout_alignBottom="@+id/summoner_icon"
         android:layout_alignStart="@+id/rank" />
 
-    <ScrollView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/scrollView"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@+id/summoner_icon" >
-
-        <ListView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/listView" />
-    </ScrollView>
-
     <ProgressBar
         style="?android:attr/progressBarStyleLarge"
         android:layout_width="wrap_content"
@@ -77,6 +62,14 @@
         android:id="@+id/progressBarChamp"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/champList"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/summoner_icon"
+        android:layout_marginTop="20dp" />
 
 
 </RelativeLayout>

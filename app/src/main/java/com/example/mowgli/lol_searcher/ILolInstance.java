@@ -5,7 +5,8 @@ import android.content.Context;
 /**
  * Created by mowgli on 21/04/2016.
  */
+
 public interface ILolInstance
 {
-    public void updateSummoner(Context context);
+    public void update(Context context);
 }
