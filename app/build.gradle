@@ -28,3 +28,11 @@ dependencies {
 dependencies {
     compile 'com.koushikdutta.ion:ion:2.+'
 }
+
+repositories {
+    maven { url "https://jitpack.io" }
+}
+
+dependencies {
+    compile 'com.github.PhilJay:MPAndroidChart:v2.2.4'
+}

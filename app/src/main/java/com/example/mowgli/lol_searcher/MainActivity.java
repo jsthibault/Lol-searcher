@@ -11,6 +11,11 @@ import android.widget.Spinner;
 
 import com.koushikdutta.ion.Ion;
 
+/**
+ * Created by mowgli on 25/04/2016.
+ * jean.stephane.thib@gmail.com
+ */
+
 public class MainActivity extends AppCompatActivity {
 
     private EditText        _mEdit;

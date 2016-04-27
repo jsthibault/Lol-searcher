@@ -15,41 +15,41 @@ import android.widget.TextView;
 import java.util.List;
 
 /**
- * Created by mowgli on 22/04/2016.
+ * Created by mowgli on 25/04/2016.
+ * jean.stephane.thib@gmail.com
  */
 
 public class ListFiller extends ArrayAdapter<String>
 {
-    private final Activity context;
-    private final List<String> itemname;
-    private final Integer[] imgid;
+    private final Activity          context;
+    private final List<String>      itemname;
+    private final List<Champion>    _listChampion;
 
-    public ListFiller(Activity context, List<String> list, Integer[] imgid)
+    public ListFiller(Activity context, List<String> list, List<Champion> listChampion)
     {
-        //
         super(context, R.layout.mylist, list);
-
         this.context = context;
         this.itemname = list;
-        this.imgid = imgid;
+        this._listChampion = listChampion;
     }
 
 
     public View getView(int position, View view, ViewGroup parent)
     {
-        LayoutInflater inflater = context.getLayoutInflater();
-        View rowView = inflater.inflate(R.layout.mylist, null, true);
+        Champion            tmp;
+        LayoutInflater      inflater = context.getLayoutInflater();
+        View                rowView = inflater.inflate(R.layout.mylist, null, true);
+        TextView            txtTitle = (TextView) rowView.findViewById(R.id.item);
+        ImageView           imageView = (ImageView) rowView.findViewById(R.id.icon);
+        TextView            extract = (TextView) rowView.findViewById(R.id.textView1);
 
-        TextView txtTitle = (TextView) rowView.findViewById(R.id.item);
-        ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
-        TextView extratxt = (TextView) rowView.findViewById(R.id.textView1);
 
-
-        System.out.println("getView");
-
+        if ((tmp = this._listChampion.get(position)) != null)
+        {
+            tmp.getImage(imageView);
+        }
         txtTitle.setText(itemname.get(position));
-        //imageView.setImageResource(imgid[position]);
-        extratxt.setText("Description "+itemname.get(position));
+        extract.setText("Description "+itemname.get(position));
         return rowView;
     };
 }

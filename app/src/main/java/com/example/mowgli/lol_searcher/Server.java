@@ -20,7 +20,8 @@ import java.util.Hashtable;
 import java.util.List;
 
 /**
- * Created by mowgli on 21/04/2016.
+ * Created by mowgli on 25/04/2016.
+ * jean.stephane.thib@gmail.com
  */
 
 enum CallBack
@@ -42,7 +43,7 @@ public class Server
         this._key = key;
         this._season = season;
         _tab = new ILolInstance[4];
-        System.out.println(this._season);
+        //System.out.println(this._season);
     }
 
     String          getLocalisation() { return(this._localisation); }
@@ -67,13 +68,13 @@ public class Server
                         JsonArray   tmpArray = null;
                         String      tmp =  null;
 
-                        System.out.println(result);
+                       // System.out.println(result);
                         if (result == null)
                         {
                             //set error
                             return;
                         }
-                        System.out.println(result);
+                       // System.out.println(result);
                         if ((tmpJson = result.getAsJsonObject("status")) != null)
                         {
                             if ((tmp = tmpJson.get("status_code").toString()) != null)
@@ -116,7 +117,7 @@ public class Server
                         tmp = tmp.replaceAll("\"","");
                         summoner.setDivision(tmp);
 
-                        System.out.println("GOOOO : " + summoner.getName() + " " + summoner.getDivision());
+                        //System.out.println("GOOOO : " + summoner.getName() + " " + summoner.getDivision());
                         updateCallBack(CallBack.SUMMONER, context);
                     }
                 });
@@ -125,8 +126,8 @@ public class Server
     public void     fillSumm(final Context context, final Summoner summoner)
     {
         this._tab[CallBack.SUMMONER.ordinal()] = summoner;
-        System.out.println("https://" + this._localisation + ".api.pvp.net/api/lol/" + this._localisation
-                + "/v1.4/summoner/by-name/" + summoner.getName() + "?api_key=" + this._key);
+        //System.out.println("https://" + this._localisation + ".api.pvp.net/api/lol/" + this._localisation
+               // + "/v1.4/summoner/by-name/" + summoner.getName() + "?api_key=" + this._key);
         Future<JsonObject> jsonObjectFuture = Ion.with(context)
                 .load("https://" + this._localisation + ".api.pvp.net/api/lol/" + this._localisation
                         + "/v1.4/summoner/by-name/" + summoner.getName() + "?api_key=" + this._key)
@@ -144,10 +145,9 @@ public class Server
                             //setError
                             return;
                         }
-                        System.out.println(result);
+                       //System.out.println(result);
                         if ((result = result.getAsJsonObject(summoner.getName())) == null)
                         {
-                            System.out.println("dans sumName");
                             //setError
                             return ;
                         }
@@ -158,7 +158,6 @@ public class Server
                             //setError
                             return ;
                         }
-                        System.out.println("4");
                         summoner.setLvl(tmpLevel);
                         summoner.setId(tmpId);
                         summoner.setIdIcon(tmpIconId);
@@ -185,8 +184,6 @@ public class Server
                         Champion        tmpChamp = null;
                         List<Champion>  listChamp = new ArrayList<>();
 
-
-                        System.out.println(result);
                         if ((tmpJson = result.getAsJsonObject("status")) != null)
                         {
                             if ((tmp = tmpJson.get("status_code").toString()) != null)
@@ -216,9 +213,7 @@ public class Server
                             {
                                 listChamp.add(tmpChamp);
                             }
-                            System.out.println(i + " " + tmpArray.get(i).getAsJsonObject());
                         }
-                        System.out.println(listChamp);
                         list.setListChamp(listChamp);
                         updateCallBack(CallBack.LISTCHAMP, context);
                     }
@@ -235,21 +230,18 @@ public class Server
                 .setCallback(new FutureCallback<JsonObject>() {
                     @Override
                     public void onCompleted(Exception e, JsonObject result) {
-
-                        System.out.println(result);
-
                         JsonObject      tmpJson = null;
                         JsonArray       tmpArray = null;
                         String          tmp =  null;
 
-                        System.out.println(" id " + id);
+                        //System.out.println(" id " + id);
                         if (result == null)
                         {
-                            System.out.println("KKK : " + "https://global.api.pvp.net/api/lol/static-data/" + _localisation + "/v1.2/champion/"
-                                    + id + "?api_key=" + _key);
+                            //System.out.println("KKK : " + "https://global.api.pvp.net/api/lol/static-data/" + _localisation + "/v1.2/champion/"
+                                 //   + id + "?api_key=" + _key);
                             return;
                         }
-                        System.out.println(result + " id " + id);
+                        //System.out.println(result + " id " + id);
                         if ((tmpJson = result.getAsJsonObject("status")) != null)
                         {
                             if ((tmp = tmpJson.get("status_code").toString()) != null)
@@ -260,6 +252,7 @@ public class Server
                         }
                         champ.setName(result.get("name").toString().replaceAll("\"",""));
                         champ.setTitle(result.get("title").toString().replaceAll("\"",""));
+                        champ.setKey(result.get("key").toString().replaceAll("\"",""));
                         updateCallBack(CallBack.CHAMPION, context);
                     }
                 });
