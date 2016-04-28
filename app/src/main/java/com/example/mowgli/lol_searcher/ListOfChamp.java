@@ -103,7 +103,7 @@ public class ListOfChamp extends AppCompatActivity implements ILolInstance {
                 if ((tmp = _listChampion.get(position)) != null)
                 {
                     System.out.println(tmp.toString());
-                    i.putExtra("nom", tmp.getName());
+                    i.putExtra("name", tmp.getName());
                     i.putExtra("key", tmp.getKey());
                     i.putExtra("id", tmp.getId());
                     i.putExtra("title", tmp.getTitle());

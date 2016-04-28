@@ -2,6 +2,7 @@ package com.example.mowgli.lol_searcher;
 
 import android.content.Context;
 import android.net.Uri;
+import android.util.Log;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -14,6 +15,8 @@ import com.koushikdutta.async.http.body.StringBody;
 import com.koushikdutta.ion.Ion;
 import com.koushikdutta.ion.loader.AsyncHttpRequestFactory;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Hashtable;
@@ -32,10 +35,10 @@ enum CallBack
 }
 public class Server
 {
-    private String              _localisation = null;
-    private String              _key = null;
-    private String              _season = null;
-    private ILolInstance[]      _tab;
+    private String          _localisation = null;
+    private String          _key = null;
+    private String          _season = null;
+    private ILolInstance[]  _tab;
 
     Server(String localisation, String key, String season)
     {
@@ -46,11 +49,27 @@ public class Server
         //System.out.println(this._season);
     }
 
-    String          getLocalisation() { return(this._localisation); }
+    String getLocalisation()
+    {
+        return (this._localisation);
+    }
 
-    private   void  updateCallBack(CallBack Type, Context context)
+    private void updateCallBack(CallBack Type, Context context)
     {
         this._tab[Type.ordinal()].update(context);
+    }
+
+    private String getAsUrl(String url)
+    {
+        try
+        {
+            return(URLEncoder.encode(url,"ISO-8859-1").replaceAll("\\+", "%20"));
+        }
+        catch (UnsupportedEncodingException e)
+        {
+            e.printStackTrace();
+        }
+        return (url);
     }
 
     private void    getRank(final Context context, final Summoner summoner)
@@ -125,17 +144,19 @@ public class Server
 
     public void     fillSumm(final Context context, final Summoner summoner)
     {
+      //  String      tmp = summoner.getName().replaceAll(" ", "%20");
+
+        //System.out.println(getAsUrl(summoner.getName()));
         this._tab[CallBack.SUMMONER.ordinal()] = summoner;
-        //System.out.println("https://" + this._localisation + ".api.pvp.net/api/lol/" + this._localisation
-               // + "/v1.4/summoner/by-name/" + summoner.getName() + "?api_key=" + this._key);
+        System.out.println("https://" + this._localisation + ".api.pvp.net/api/lol/" + this._localisation
+               + "/v1.4/summoner/by-name/" + getAsUrl(summoner.getName()) + "?api_key=" + this._key);
         Future<JsonObject> jsonObjectFuture = Ion.with(context)
                 .load("https://" + this._localisation + ".api.pvp.net/api/lol/" + this._localisation
-                        + "/v1.4/summoner/by-name/" + summoner.getName() + "?api_key=" + this._key)
+                        + "/v1.4/summoner/by-name/" + getAsUrl(summoner.getName()) + "?api_key=" + this._key)
                 .asJsonObject()
                 .setCallback(new FutureCallback<JsonObject>() {
                     @Override
                     public void onCompleted(Exception e, JsonObject result) {
-
                         String tmpId = null;
                         String tmpIconId = null;
                         String tmpLevel = null;
@@ -146,7 +167,7 @@ public class Server
                             return;
                         }
                        //System.out.println(result);
-                        if ((result = result.getAsJsonObject(summoner.getName())) == null)
+                        if ((result = result.getAsJsonObject(summoner.getName().replaceAll(" ", ""))) == null)
                         {
                             //setError
                             return ;
@@ -155,7 +176,6 @@ public class Server
                                 ((tmpIconId = result.get("profileIconId").toString()) == null) ||
                                 ((tmpLevel = result.get("summonerLevel").toString()) == null))
                         {
-                            //setError
                             return ;
                         }
                         summoner.setLvl(tmpLevel);
@@ -214,6 +234,7 @@ public class Server
                                 listChamp.add(tmpChamp);
                             }
                         }
+                       // System.out.println(tmpChamp.getName());
                         list.setListChamp(listChamp);
                         updateCallBack(CallBack.LISTCHAMP, context);
                     }

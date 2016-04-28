@@ -50,7 +50,7 @@ public class Champion implements ILolInstance
     @Override
     public void update(Context context)
     {
-        //System.out.println("Looser3 : " + this.getName());
+        System.out.println("Looser3 : " + this.getName());
         this._list.getListName().add(this.getName());
         this._list.getListId().add(Integer.parseInt(this.getId()));
         this._list.fillChamp();

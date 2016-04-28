@@ -9,5 +9,5 @@ import android.content.Context;
 
 public interface ILolInstance
 {
-    public void update(Context context);
+    void update(Context context);
 }
